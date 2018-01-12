@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
     private Led light;
     private Display display;
     private MusicPlayer music;
+    private Screen screen;
     private MyDevice myDevice;
 
     @Override
@@ -46,7 +47,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     myDevice.pause(1);
-                    myDevice.alarm_with_RSP();
+                    myDevice.alarm_with_rsp();
                     myDevice.pause(1);
                     finish();
                 }

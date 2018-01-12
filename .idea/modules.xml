@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/alarm-with-rsp.iml" filepath="$PROJECT_DIR$/alarm-with-rsp.iml" />
       <module fileurl="file://$PROJECT_DIR$/apps/apps.iml" filepath="$PROJECT_DIR$/apps/apps.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mtg-2018-athings-demo.iml" filepath="$PROJECT_DIR$/mtg-2018-athings-demo.iml" />
     </modules>
   </component>
 </project>

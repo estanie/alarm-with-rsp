@@ -48,37 +48,67 @@ public class MyDevice {
 
     /** 여기서부터 시작 */
 
-    public void alarm_with_RSP() {
-        ScheduledJob job = new ScheduledJob(display);
+    public void alarm_with_rsp() {
+
+        ScheduledJob job = new ScheduledJob(display, music);
         Timer jobScheduler = new Timer();
         jobScheduler.scheduleAtFixedRate(job, 1000, 5000);
-        try{
-            Thread.sleep(20000);
-        } catch(InterruptedException ex){
+
+        while(true) {
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
+            cal.getTime();
+            int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12;
+            int getMinute = cal.get(Calendar.MINUTE);
+            if(getHour == setTime() / 100 && getMinute == setTime() % 100) {
+                // alarm();
+            }
+            try {
+                Thread.sleep(20000);
+            } catch(InterruptedException e){
+            }
+
         }
-        jobScheduler.cancel();
+    }
+
+    int setTime() // 스크린 어케 구현하지 ㅠㅠ
+    {
+        int setHour = 0;
+        int setMinute = 0;
+        int setTime = setHour * 100 + setMinute;
+        return setTime;
+    }
+
+    void alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
+        if(start) music.play(C);
+        else music.stop();
     }
 }
 
 class ScheduledJob extends TimerTask{
     private Display display;
-    ScheduledJob(Display device_display) {
-        display = device_display;
+    private MusicPlayer music;
+
+    ScheduledJob(Display display, MusicPlayer music) {
+        this.display = display;
+        this.music = music;
     }
 
     public void run()
     {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
         cal.getTime();
-        String hour = Integer.toString(cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12);
-        String minute = Integer.toString(cal.get(Calendar.MINUTE));
+        int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12;
+        int getMinute = cal.get(Calendar.MINUTE);
 
-        if(hour.length() < 2) {
-            hour = '0' + hour;
+        String sHour = Integer.toString(getHour);
+        String sMinute = Integer.toString(getMinute);
+
+        if(sHour.length() < 2) {
+            sHour = '0' + sHour;
         }
-        if(minute.length() < 2){
-            minute = '0' + minute;
+        if(sMinute.length() < 2){
+            sMinute = '0' + sMinute;
         }
-        display.show(hour+minute);
+        display.show(sHour+sMinute);
     }
 }
