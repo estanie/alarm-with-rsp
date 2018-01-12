@@ -86,11 +86,9 @@ public class MyDevice {
 
 class ScheduledJob extends TimerTask{
     private Display display;
-    private MusicPlayer music;
 
     ScheduledJob(Display display, MusicPlayer music) {
         this.display = display;
-        this.music = music;
     }
 
     public void run()
