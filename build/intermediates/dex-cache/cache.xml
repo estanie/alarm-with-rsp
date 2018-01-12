@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\2e29b18eff1a8d3f0f914e6984f3f170b6862aa3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e837b2a90564e2b6037f7df1eebd0454236c8e04">
+        <dex dex="C:\Users\user\Desktop\google\mtg-2018-athings-demo\mtg-2018-athings-demo\apps\build\intermediates\pre-dexed\debug\classes_812d8951fe3dccd2f9f97604dd2c1ee64a095da6.jar" />
+    </item>
+
+</items>
