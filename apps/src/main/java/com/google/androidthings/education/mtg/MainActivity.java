@@ -27,16 +27,22 @@ import static com.google.androidthings.education.mtg.Led.ALL;
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
+
     private Led light;
     private Display display;
     private MusicPlayer music;
-    private Screen screen;
+ //   private Screen screen;
     private MyDevice myDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
+
+        setContentView(R.layout.activity_main);
+        //이게 시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
+
+
 
         display = new Display();
         music = new MusicPlayer();
