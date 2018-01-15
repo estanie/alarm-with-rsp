@@ -22,6 +22,7 @@ import static com.google.androidthings.education.mtg.MusicPlayer.Note.D;
 import static com.google.androidthings.education.mtg.MusicPlayer.Note.E;
 import static com.google.androidthings.education.mtg.MusicPlayer.Note.F;
 import static com.google.androidthings.education.mtg.MusicPlayer.Note.G;
+import java.util.Random;
 
 /**
  * My Device!
@@ -83,6 +84,52 @@ public class MyDevice implements Serializable {
     void alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
         if(start) music.play(C);
         else music.stop();
+    }
+
+    int user_key(){ // user키 입력 및 컴퓨터에게 이기는 패로 바꿈
+        return 1;
+    }
+
+    boolean check(int computer){ // user키와 컴퓨터키의 매칭을 확인
+        int k = user_key();
+        if(k == computer)return true;
+        return false;
+    }
+
+    void rand_computer() { // 난수를 생성하고 종료조건을 확인한다.
+        int win_number = 0;
+        Random rand = new Random();
+        //first
+        while(win_number < 10){
+            int com = rand.nextInt(3)+1;
+            // alram(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
+            if(check(com))win_number += 1;
+        }
+        //second
+        /*
+        for(int i = 1 ; i <= 10 ; i++)
+            int com = rand.nextInt(3)+1;
+            // alram(win_number);
+            if(check(com))check_number += 1;
+        }
+        */
+        //third
+        /*
+        int count = 0; // 연속해서 2번 지는 지 확인
+        while(win_number < 10){
+            int com = rand.nextInt(3)+1;
+            // alram(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
+            if(check(com)){
+                win_number += 1;
+                count = 0;
+             }
+             else if(count==2){
+                win_number += 1;
+                count = 0;
+             }
+             else count++;
+        }
+         */
     }
 }
 
