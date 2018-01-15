@@ -102,7 +102,8 @@ public class MyDevice implements Serializable {
         //first
         while(win_number < 10){
             int com = rand.nextInt(3)+1;
-            // alram(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
+            // alarm(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
+            ledOn(win_number);
             if(check(com))win_number += 1;
         }
         //second

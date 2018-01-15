@@ -6,24 +6,27 @@ import android.util.Log;
  * Created by estanie on 2018-01-16.
  */
 
-public class Alarm extends Thread{
+public class Alarm implements Runnable {
     private static final String TAG = "Alarm";
-    MyDevice myDevice;
+    private MyDevice myDevice;
+
     public Alarm(MyDevice myDevice){
         this.myDevice = myDevice;
     }
+
     public void run(){
         int second = 0;
+        long threadId = Thread.currentThread().getId();
+
         Log.e(TAG,"Alarm is running");
-        while (second<=1000*60) {
-            second++;
-            try{
-                myDevice.alarm_bell(true);
-                Log.d(TAG,"***id: "+this.getId());
-            }catch(Exception e){
-                Log.e(TAG,"Error: "+e);
-            }
+
+        myDevice.alarm_bell(true);
+        try {
+            Thread.sleep(1000 * 60);
+        } catch (InterruptedException e){
+            Log.e(TAG,e.toString());
         }
         myDevice.alarm_bell(false);
+
     }
 }
