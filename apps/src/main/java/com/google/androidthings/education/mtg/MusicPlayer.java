@@ -6,6 +6,7 @@ import com.google.android.things.contrib.driver.pwmspeaker.Speaker;
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.EnumMap;
 
 import static android.content.ContentValues.TAG;

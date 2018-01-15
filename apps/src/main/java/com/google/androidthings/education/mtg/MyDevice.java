@@ -2,6 +2,9 @@ package com.google.androidthings.education.mtg;
 
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.util.Log;
@@ -25,17 +28,34 @@ import static com.google.androidthings.education.mtg.MusicPlayer.Note.G;
  */
 
 
-public class MyDevice {
+public class MyDevice implements Serializable {
     private static final String TAG = MyDevice.class.getSimpleName();
 
     private Led light;
     private Display display;
     private MusicPlayer music;
 
+    public Led getLight() {
+        return light;
+    }
+
+    public MusicPlayer getMusic() {
+        return music;
+    }
+    public Display getDisplay(){
+        return display;
+    }
+
     public MyDevice(Display display, MusicPlayer music, Led light) {
         this.display = display;
         this.music = music;
         this.light = light;
+    }
+
+    public void open(){
+        light.open();
+        music.open();
+        display.open();
     }
 
     public static void pause(double pauseTimeSec) {
@@ -45,29 +65,11 @@ public class MyDevice {
             Log.e(TAG, "Failed to sleep", e);
         }
     }
-
     /** 여기서부터 시작 */
 
-    public void alarm_with_rsp() {
-
-        ScheduledJob job = new ScheduledJob(display, music);
-        Timer jobScheduler = new Timer();
-        jobScheduler.scheduleAtFixedRate(job, 1000, 5000);
-
-        while(true) {
-            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
-            cal.getTime();
-            int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12;
-            int getMinute = cal.get(Calendar.MINUTE);
-            if(getHour == setTime() / 100 && getMinute == setTime() % 100) {
-                // alarm();
-            }
-            try {
-                Thread.sleep(20000);
-            } catch(InterruptedException e){
-            }
-
-        }
+    public void ledOn(int times){
+        for (int i = 0;i<times;i++)
+            light.on(i);
     }
 
     int setTime() // 스크린 어케 구현하지 ㅠㅠ
@@ -84,29 +86,3 @@ public class MyDevice {
     }
 }
 
-class ScheduledJob extends TimerTask{
-    private Display display;
-
-    ScheduledJob(Display display, MusicPlayer music) {
-        this.display = display;
-    }
-
-    public void run()
-    {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
-        cal.getTime();
-        int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12;
-        int getMinute = cal.get(Calendar.MINUTE);
-
-        String sHour = Integer.toString(getHour);
-        String sMinute = Integer.toString(getMinute);
-
-        if(sHour.length() < 2) {
-            sHour = '0' + sHour;
-        }
-        if(sMinute.length() < 2){
-            sMinute = '0' + sMinute;
-        }
-        display.show(sHour+sMinute);
-    }
-}

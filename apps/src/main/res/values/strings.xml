@@ -17,4 +17,7 @@
 <resources>
     <string name="app_name">Led Strip</string>
     <string name="pick_time">Select Time</string>
+    <string name="wake_up">Its Time to Wake Up!</string>
+    <string name="winner">The Winner is</string>
+
 </resources>

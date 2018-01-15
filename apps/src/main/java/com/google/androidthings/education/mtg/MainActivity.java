@@ -17,6 +17,7 @@
 package com.google.androidthings.education.mtg;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -27,48 +28,19 @@ import static com.google.androidthings.education.mtg.Led.ALL;
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-
-    private Led light;
-    private Display display;
-    private MusicPlayer music;
- //   private Screen screen;
-    private MyDevice myDevice;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
 
-        setContentView(R.layout.activity_main);
-        //이게 시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
-
-
-
-        display = new Display();
-        music = new MusicPlayer();
-        light = new Led();
-        myDevice = new MyDevice(display, music, light);
-        if (light.open() && display.open() && music.open()) {
-            new Thread() {
-                @Override
-                public void run() {
-                    myDevice.pause(1);
-                    myDevice.alarm_with_rsp();
-                    myDevice.pause(1);
-                    finish();
-                }
-            }.start();
-        } else {
-            finish();
-        }
+        setContentView(R.layout.activity_main);//시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
+        Intent intent = new Intent(MainActivity.this, MyService.class);
+        startService(intent);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy");
-        light.close();
-        display.close();
-        music.close();
     }
 }

@@ -4,11 +4,11 @@ import com.google.android.things.contrib.driver.ht16k33.AlphanumericDisplay;
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Display {
+public class Display{
 
     private AlphanumericDisplay mSegmentDisplay;
-
     public boolean open() {
         try {
             mSegmentDisplay = RainbowHat.openDisplay();

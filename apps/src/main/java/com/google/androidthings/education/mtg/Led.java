@@ -7,6 +7,7 @@ import com.google.android.things.contrib.driver.apa102.Apa102;
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 public class Led {
     private static final String TAG = "LED";
@@ -24,7 +25,7 @@ public class Led {
     public static final int PINK = 0xffff00c0;
     public static final int ALL = 100;
 
-    private static final int DEF_BRIGHTNESS = 3;
+    private static final int DEF_BRIGHTNESS = 5;
 
 
     private Apa102 mLedStrip;
