@@ -89,8 +89,7 @@ public class MyService extends Service {
             }
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM) * 12;
             int getMinute = cal.get(Calendar.MINUTE);
-
-            //if(getHour == setTime() / 100 && getMinute == setTime() % 100) {
+//  TimerPicker tp = (TimePicker) findViewById(R.id.tp);
             if (getHour == getHour && getMinute == getMinute) { // 테스트용 나중에 setTime 완성되면 바꾸기
                 if (!alarmThread.isAlive()) {
                     alarmThread.start();

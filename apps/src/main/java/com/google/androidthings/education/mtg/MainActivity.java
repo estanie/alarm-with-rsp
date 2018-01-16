@@ -20,13 +20,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.icu.util.Calendar;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 
 import static com.google.androidthings.education.mtg.MusicPlayer.Note;
 import static com.google.androidthings.education.mtg.Led.ALL;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TimePicker.OnTimeChangedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    TextView tv;
+    TimePicker tp;
+    Calendar c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,19 @@ public class MainActivity extends Activity {
         Log.d(TAG, "onCreate");
 
         setContentView(R.layout.activity_main);//시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
+
+        c = Calendar.getInstance();
+        tv = (TextView) findViewById(R.id.tv);
+        tp = (TimePicker) findViewById(R.id.tp);
+        tp.setOnTimeChangedListener(this);
+
         Intent intent = new Intent(MainActivity.this, MyService.class);
         startService(intent);
+    }
+
+    @Override
+    public void onTimeChanged(TimePicker view, int hourOfDay, int minute){
+        tv.setText("현재 설정된 시간 \n시:분 |" + hourOfDay + ":"  + minute);
     }
 
     @Override
