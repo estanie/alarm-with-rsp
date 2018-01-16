@@ -8,6 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TimePicker>
 
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" 이 시각에 알람을 설정합니다." />
+
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"

@@ -73,14 +73,6 @@ public class MyDevice implements Serializable {
             light.on(i);
     }
 
-    int setTime() // 스크린 어케 구현하지 ㅠㅠ
-    {
-        int setHour = 0;
-        int setMinute = 0;
-        int setTime = setHour * 100 + setMinute;
-        return setTime;
-    }
-
     void alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
         if(start) music.play(C);
         else music.stop();

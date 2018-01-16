@@ -18,22 +18,30 @@ package com.google.androidthings.education.mtg;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 import android.util.Log;
 import android.icu.util.Calendar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 
+import java.util.Timer;
+
 import static com.google.androidthings.education.mtg.MusicPlayer.Note;
 import static com.google.androidthings.education.mtg.Led.ALL;
 
-public class MainActivity extends Activity implements TimePicker.OnTimeChangedListener {
+public class MainActivity extends Activity implements View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     TextView tv;
     TimePicker tp;
-    Calendar c;
+    Button btn;
+
+    int setHour = -1;
+    int setMinute = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +50,19 @@ public class MainActivity extends Activity implements TimePicker.OnTimeChangedLi
 
         setContentView(R.layout.activity_main);//시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
 
-        c = Calendar.getInstance();
         tv = (TextView) findViewById(R.id.tv);
         tp = (TimePicker) findViewById(R.id.tp);
-        tp.setOnTimeChangedListener(this);
+        btn = (Button) findViewById(R.id.btn);
 
-        Intent intent = new Intent(MainActivity.this, MyService.class);
+        btn.setOnClickListener(this);
+
+       Intent intent = new Intent(MainActivity.this, MyService.class);
         startService(intent);
     }
 
     @Override
-    public void onTimeChanged(TimePicker view, int hourOfDay, int minute){
-        tv.setText("현재 설정된 시간 \n시:분 |" + hourOfDay + ":"  + minute);
+    public void onClick(View v) {
+        tv.setText(tp.getHour() + " 시" + tp.getMinute() + " 분에 알람이 울립니다.");
     }
 
     @Override

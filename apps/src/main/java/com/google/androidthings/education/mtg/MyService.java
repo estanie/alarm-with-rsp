@@ -8,6 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.TimePicker;
 
 import com.google.androidthings.education.mtg.Display;
 import com.google.androidthings.education.mtg.Led;
@@ -74,36 +75,39 @@ public class MyService extends Service {
         jobScheduler.scheduleAtFixedRate(job, 1000, 5000);
         Alarm alarm = new Alarm(myDevice);
         Thread alarmThread = null;
-        while (true) {
 
-            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
-            cal.getTime();
-
+        while(true)
+        {
             if (alarmThread == null || alarmThread.getState() == Thread.State.TERMINATED) {
                 alarmThread = new Thread(alarm);
             }
 
             if (false) {//게임 횟수가 다 되었으면.
                 alarmThread.interrupt();
-                break;
+            return;
             }
+
+            Calendar cal = Calendar.getInstance();
+            cal.getTime();
+
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM) * 12;
             int getMinute = cal.get(Calendar.MINUTE);
-//  TimerPicker tp = (TimePicker) findViewById(R.id.tp);
-            if (getHour == getHour && getMinute == getMinute) { // 테스트용 나중에 setTime 완성되면 바꾸기
-                if (!alarmThread.isAlive()) {
-                    alarmThread.start();
-                    Intent intent = new Intent(this, StartActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+
+//            if (getHour == setHour-9 && getMinute == setMinute) { // 테스트용 나중에 setTime 완성되면 바꾸기
+  //              led.toggle(1);
+/*            if (!alarmThread.isAlive()) {
+                alarmThread.start();
+                Intent intent = new Intent(this, StartActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }*/
             }
+
 //            try {
 //                Thread.sleep(10000);
 //            } catch (InterruptedException e) {
 //                Log.d(TAG, "Fail to Thread Sleep: " + e);
 //            }
-        }
     }
 
     @Override
