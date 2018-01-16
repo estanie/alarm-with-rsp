@@ -93,21 +93,15 @@ public class MyService extends Service {
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM) * 12;
             int getMinute = cal.get(Calendar.MINUTE);
 
-//            if (getHour == setHour-9 && getMinute == setMinute) { // 테스트용 나중에 setTime 완성되면 바꾸기
-  //              led.toggle(1);
-/*            if (!alarmThread.isAlive()) {
-                alarmThread.start();
-                Intent intent = new Intent(this, StartActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }*/
+            if (getHour == (MainActivity.setTime() / 100) - 9 && getMinute == MainActivity.setTime() % 100) {
+                if (!alarmThread.isAlive()) {
+                    alarmThread.start();
+                    Intent intent = new Intent(this, StartActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
             }
-
-//            try {
-//                Thread.sleep(10000);
-//            } catch (InterruptedException e) {
-//                Log.d(TAG, "Fail to Thread Sleep: " + e);
-//            }
+        }
     }
 
     @Override

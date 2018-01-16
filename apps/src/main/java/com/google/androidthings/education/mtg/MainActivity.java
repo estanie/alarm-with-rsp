@@ -40,8 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     TimePicker tp;
     Button btn;
 
-    int setHour = -1;
-    int setMinute = -1;
+    static int setHour = -1;
+    static int setMinute = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +60,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         startService(intent);
     }
 
+    public static int setTime() {
+        return setHour * 100 + setMinute;
+    }
+
     @Override
     public void onClick(View v) {
-        tv.setText(tp.getHour() + " 시" + tp.getMinute() + " 분에 알람이 울립니다.");
+        setHour = tp.getHour();
+        setMinute = tp.getMinute();
+        tv.setText(setHour + " 시" + setMinute + " 분에 알람이 울립니다.");
     }
 
     @Override
