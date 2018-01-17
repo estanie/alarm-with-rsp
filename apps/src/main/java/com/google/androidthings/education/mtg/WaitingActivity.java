@@ -20,7 +20,7 @@ public class WaitingActivity extends Activity {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_waiting);
         Button waitingButton = (Button) findViewById(R.id.waiting_button);
-        // 입력받는 부분 여기에서 해주시면 돼요! :)
+        // @TODO: 버튼으로 입력 받기 및 완료되면 버튼 제거하기.
         waitingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent;

@@ -15,13 +15,13 @@ public class Alarm implements Runnable {
     }
 
     public void run(){
-        int second = 0;
         long threadId = Thread.currentThread().getId();
 
         Log.e(TAG,"Alarm is running");
 
         myDevice.alarm_bell(true);
         try {
+            // @TODO: 현재 1분이지만 10분으로 다시 변경해야함.
             Thread.sleep(1000 * 60);
         } catch (InterruptedException e){
             Log.e(TAG,e.toString());

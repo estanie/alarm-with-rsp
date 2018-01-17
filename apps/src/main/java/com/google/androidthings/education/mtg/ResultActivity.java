@@ -32,10 +32,10 @@ public class ResultActivity extends Activity {
         } else {
             winner.setText("Com Win!");
         }
-        times = 5;//이긴 횟수 받는 부분!
         nextStep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent;
+                // @TODO: 서비스 바인딩해서 이긴 횟수
                 if (times<RSP_TIMES) {
                     intent = new Intent(ResultActivity.this, WaitingActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -99,6 +99,7 @@ public class MyService extends Service {
                     alarmThread.start();
                     Intent intent = new Intent(this, StartActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     startActivity(intent);
                 }
             }
