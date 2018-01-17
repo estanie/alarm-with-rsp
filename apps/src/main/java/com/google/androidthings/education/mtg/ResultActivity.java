@@ -29,6 +29,8 @@ public class ResultActivity extends Activity {
 
         if (getResult){
             winner.setText("You Win!");
+            times++;
+
         } else {
             winner.setText("Com Win!");
         }

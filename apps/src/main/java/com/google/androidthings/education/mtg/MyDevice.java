@@ -31,14 +31,9 @@ import java.util.Random;
 
 public class MyDevice implements Serializable {
     private static final String TAG = MyDevice.class.getSimpleName();
-    private static final int PLAY_GAME_TIMES = 10;
     private Led light;
     private Display display;
     private MusicPlayer music;
-    int win_number = 0;
-    public int getWin_number() {
-        return win_number;
-    }
 
     public Led getLight() {
         return light;
@@ -80,55 +75,6 @@ public class MyDevice implements Serializable {
     void alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
         if(start) music.play(C);
         else music.stop();
-    }
-
-    int user_key(){ // user키 입력 및 컴퓨터에게 이기는 패로 바꿈
-        return 1;
-    }
-
-    boolean check(int computer){ // user키와 컴퓨터키의 매칭을 확인
-        int k = user_key();
-        if(k == computer)return true;
-        return false;
-    }
-
-    boolean isGamePlaying() {
-        return win_number < PLAY_GAME_TIMES;
-    }
-    void rand_computer() { // 난수를 생성하고 종료조건을 확인한다.
-        Random rand = new Random();
-        //first
-        while(isGamePlaying()) {
-            int com = rand.nextInt(3)+1;
-            // alarm(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
-            ledOn(win_number);
-            if(check(com))win_number += 1;
-        }
-        //second
-        /*
-        for(int i = 1 ; i <= 10 ; i++)
-            int com = rand.nextInt(3)+1;
-            // alram(win_number);
-            if(check(com))check_number += 1;
-        }
-        */
-        //third
-        /*
-        int count = 0; // 연속해서 2번 지는 지 확인
-        while(win_number < 10){
-            int com = rand.nextInt(3)+1;
-            // alram(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
-            if(check(com)){
-                win_number += 1;
-                count = 0;
-             }
-             else if(count==2){
-                win_number += 1;
-                count = 0;
-             }
-             else count++;
-        }
-         */
     }
 }
 

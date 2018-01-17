@@ -6,17 +6,20 @@
     <TimePicker
         android:id="@+id/tp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TimePicker>
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btn"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text=" 이 시각에 알람을 설정합니다." />
 
     <TextView
+        android:gravity="center"
         android:id="@+id/tv"
-        android:textSize="32dp"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

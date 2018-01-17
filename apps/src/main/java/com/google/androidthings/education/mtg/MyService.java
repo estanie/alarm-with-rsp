@@ -88,13 +88,13 @@ public class MyService extends Service {
                 return;
             }
 
-            Calendar cal = Calendar.getInstance();
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
             cal.getTime();
 
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM) * 12;
             int getMinute = cal.get(Calendar.MINUTE);
 
-            if (getHour == (MainActivity.setTime() / 100) - 9 && getMinute == MainActivity.setTime() % 100) {
+            if (getHour == (MainActivity.setTime() / 100) && getMinute == MainActivity.setTime() % 100) {
                 if (!alarmThread.isAlive()) {
                     alarmThread.start();
                     Intent intent = new Intent(this, StartActivity.class);
@@ -108,5 +108,9 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
     }
 }

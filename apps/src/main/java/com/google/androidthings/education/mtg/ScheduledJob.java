@@ -3,6 +3,7 @@ package com.google.androidthings.education.mtg;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 
+import java.util.Locale;
 import java.util.TimerTask;
 
 /**
@@ -23,15 +24,6 @@ public class ScheduledJob extends TimerTask{
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM)*12;
             int getMinute = cal.get(Calendar.MINUTE);
 
-            String sHour = Integer.toString(getHour);
-            String sMinute = Integer.toString(getMinute);
-
-            if(sHour.length() < 2) {
-                sHour = '0' + sHour;
-            }
-            if(sMinute.length() < 2){
-                sMinute = '0' + sMinute;
-            }
-            display.show(sHour+sMinute);
+            display.show(String.format(Locale.getDefault(),"%02d%02d", getHour,getMinute));
         }
     }
