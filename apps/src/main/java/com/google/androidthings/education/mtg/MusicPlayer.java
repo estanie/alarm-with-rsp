@@ -25,7 +25,6 @@ public class MusicPlayer {
 
     private Speaker mSpeaker;
     private EnumMap<Note, Double> mNoteMap;
-
     public boolean open() {
         try {
             mSpeaker = RainbowHat.openPiezo();

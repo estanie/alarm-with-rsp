@@ -34,7 +34,8 @@ public class MyDevice implements Serializable {
     private Led light;
     private Display display;
     private MusicPlayer music;
-
+    private MusicPlayer.Note nabiya[] = { G, E, E, E, F, D, D, D, C, D, E, F, G, G, G, G,
+            G, E, E, E, F, D, D, D, C, E, G, G, E, E, E, E};
     public Led getLight() {
         return light;
     }
@@ -82,9 +83,13 @@ public class MyDevice implements Serializable {
             light.on(i);
     }
 
-    void alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
-        if(start) music.play(C);
+    boolean alarm_bell(boolean start) { // 1넣으면 켜지고 0넣으면 꺼지고
+        if(start) {
+            music.play(E);
+            //music.playAll(0.5, nabiya);
+        }
         else music.stop();
+        return true;
     }
 }
 

@@ -106,7 +106,7 @@ public class MyService extends Service {
             int getMinute = cal.get(Calendar.MINUTE);
             if (getHour == (MainActivity.setTime() / 100) && getMinute == MainActivity.setTime() % 100) {
 
-                if (!alarmThread.isAlive() && !alarmThread.isInterrupted()) {
+                if (!alarmThread.isAlive() && !alarmThread.isInterrupted() && alarmThread.getState() == Thread.State.NEW) {
                     game = new RspGame();
                     alarmThread.start();
                     Intent intent = new Intent(this, StartActivity.class);

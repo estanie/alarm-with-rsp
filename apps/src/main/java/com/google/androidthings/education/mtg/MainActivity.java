@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     TimePicker tp;
     Button btn;
 
+    // @TODO: 알람 울림이 끝나고 나면 setHour, setMinute 다시 초기화 필요.
     static int setHour = -1;
     static int setMinute = -1;
 
