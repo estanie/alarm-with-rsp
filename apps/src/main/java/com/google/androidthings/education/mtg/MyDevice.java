@@ -58,6 +58,16 @@ public class MyDevice implements Serializable {
         display.open();
     }
 
+    public void close(){
+        light.close();
+        music.close();
+        display.close();
+    }
+    public void off(){
+        light.off(ALL);
+        music.stop();
+    }
+
     public static void pause(double pauseTimeSec) {
         try {
             Thread.sleep((long)(pauseTimeSec * 1000.0));

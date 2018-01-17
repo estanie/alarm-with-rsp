@@ -46,6 +46,12 @@ public class MyService extends Service {
         return mIBinder;
     }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.e("LOG", "onUnbind()");
+        return super.onUnbind(intent);
+    }
+
     public void onCreate() {
         Log.e(TAG, "onCreate()");
         display = new Display();
@@ -61,9 +67,12 @@ public class MyService extends Service {
             @Override
             public void run() {
                 myDevice.pause(1);
-                alarm_with_rsp();
-                stopSelf();
-                myDevice.pause(1);
+                try {
+                    alarm_with_rsp();
+                } catch (Exception e) {
+                    Log.e(TAG, "Alarm-with-rsp Error: ");
+                    e.printStackTrace();
+                }
             }
         };
         rspJob.start();
@@ -79,14 +88,15 @@ public class MyService extends Service {
         Alarm alarm = new Alarm(myDevice);
         Thread alarmThread = null;
 
-        while(true)
-        {
+        while (true) {
             if (alarmThread == null || alarmThread.getState() == Thread.State.TERMINATED) {
+                myDevice.off();
                 alarmThread = new Thread(alarm);
             }
-            if (game!=null && !game.isGamePlaying()) {//게임 횟수가 다 되었으면.
+            if (game != null && !game.isGamePlaying()) {//게임 횟수가 다 되었으면.
                 alarmThread.interrupt();
-                return;
+                myDevice.off();
+                Log.d(TAG, "Alarm is interrupted");
             }
 
             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+09:00"));
@@ -96,13 +106,14 @@ public class MyService extends Service {
             int getMinute = cal.get(Calendar.MINUTE);
             if (getHour == (MainActivity.setTime() / 100) && getMinute == MainActivity.setTime() % 100) {
 
-                if (!alarmThread.isAlive()) {
+                if (!alarmThread.isAlive() && !alarmThread.isInterrupted()) {
                     game = new RspGame();
                     alarmThread.start();
                     Intent intent = new Intent(this, StartActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(intent);
+
                 }
             }
         }
@@ -110,5 +121,7 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "Service is Destroyed");
+        myDevice.close();
     }
 }

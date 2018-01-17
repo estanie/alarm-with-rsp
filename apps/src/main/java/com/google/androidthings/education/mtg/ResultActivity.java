@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.androidthings.education.mtg.MyService.MyBinder;
@@ -22,7 +23,10 @@ public class ResultActivity extends Activity {
     private static final String TAG = ResultActivity.class.getSimpleName();
     MyService ms = null;
     boolean isService = false;
-
+    int userResult;
+    int comResult;
+    ImageView userResultImage;
+    ImageView comResultImage;
     TextView winner;
     TextView winTimes;
     Button nextStep;
@@ -48,6 +52,8 @@ public class ResultActivity extends Activity {
         nextStep = (Button)findViewById(R.id.next_step);
         winner = (TextView)findViewById(R.id.winner);
         winTimes = (TextView)findViewById(R.id.win_times);
+        userResultImage = (ImageView)findViewById(R.id.my_result);
+        comResultImage = (ImageView)findViewById(R.id.com_result);
 
         Intent serviceIntent = new Intent(ResultActivity.this, MyService.class);
         bindService(serviceIntent,conn, Context.BIND_AUTO_CREATE);
@@ -55,28 +61,47 @@ public class ResultActivity extends Activity {
         nextStep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent;
-                // @TODO: 서비스 바인딩해서 이긴 횟수
+                unbindService(conn);
                     if (ms.game.isGamePlaying()) {
                         intent = new Intent(ResultActivity.this, WaitingActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
                     } else {
                         intent = new Intent(ResultActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     }
-                    finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 }
         });
     }
 
     private void afterBinding() {
         ms.game.rand_computer();
-            if (ms.game.isWin()) {
-                winner.setText("You Win!");
+        userResult = ms.game.getUserKey();
+        comResult = ms.game.getComKey();
+        setImage(userResult,userResultImage);
+            if (ms.game.isUserWin()) {
+                winner.setText("WIN!");
             } else {
-                winner.setText("Com Win!");
+                winner.setText("LOSE!");
             }
-            winTimes.setText("현재까지"+ ms.game.getWin_number()+ "회 이겼습니다.");
+            setImage(comResult,comResultImage);
+            ms.myDevice.ledOn(ms.game.getWin_number());
+            winTimes.setText("현재까지 "+ ms.game.getWin_number()+ "회 이겼습니다.");
 
     }
+    private void setImage(int result,ImageView view){
+
+        switch (result){
+            case 1:
+                view.setImageResource(R.drawable.scissor);
+                break;
+            case 2:
+                view.setImageResource(R.drawable.rock);
+                break;
+            case 3:
+                view.setImageResource(R.drawable.paper);
+                break;
+        }
+    }
+
 }
