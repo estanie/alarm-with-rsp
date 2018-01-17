@@ -27,6 +27,7 @@ public class MyService extends Service {
     private Led led;
     private MusicPlayer music;
     MyDevice myDevice;
+    RspGame game = null;
 
     boolean serviceStatus = true;
 
@@ -70,6 +71,7 @@ public class MyService extends Service {
     }
 
     public void alarm_with_rsp() {
+
         Display display = myDevice.getDisplay();
         ScheduledJob job = new ScheduledJob(display);
         Timer jobScheduler = new Timer();
@@ -82,8 +84,7 @@ public class MyService extends Service {
             if (alarmThread == null || alarmThread.getState() == Thread.State.TERMINATED) {
                 alarmThread = new Thread(alarm);
             }
-
-            if (!myDevice.isGamePlaying()) {//게임 횟수가 다 되었으면.
+            if (game!=null && !game.isGamePlaying()) {//게임 횟수가 다 되었으면.
                 alarmThread.interrupt();
                 return;
             }
@@ -93,9 +94,10 @@ public class MyService extends Service {
 
             int getHour = cal.get(Calendar.HOUR) + cal.get(Calendar.AM_PM) * 12;
             int getMinute = cal.get(Calendar.MINUTE);
-
             if (getHour == (MainActivity.setTime() / 100) && getMinute == MainActivity.setTime() % 100) {
+
                 if (!alarmThread.isAlive()) {
+                    game = new RspGame();
                     alarmThread.start();
                     Intent intent = new Intent(this, StartActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -108,9 +110,5 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        startActivity(intent);
     }
 }

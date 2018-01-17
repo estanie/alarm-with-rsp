@@ -7,35 +7,44 @@ import java.util.Random;
  */
 
 public class RspGame {
-    
-    int win_number = 0;
-    int play_number = 0;
+
+    private int win_number = 0;
+    private int play_number = 0;
     private static final int PLAY_GAME_TIMES = 10;
     private static final int WIN_TIMES = 5;
+    int com = 0;
 
     public int getWin_number() {
         return win_number;
     }
+
     int user_key(){ // user키 입력 및 컴퓨터에게 이기는 패로 바꿈
         return 1;
+    }
+    public void setWin_number(int win_number){
+        this.win_number = win_number;
     }
 
     boolean check(int computer){ // user키와 컴퓨터키의 매칭을 확인
         int k = user_key();
-        if(k == computer)return true;
+        if(k == computer) return true;
         return false;
     }
 
     boolean isGamePlaying() {
         return play_number < PLAY_GAME_TIMES && win_number < WIN_TIMES;
     }
+    boolean isWin(){
+        return check(com);
+    }
     void rand_computer() { // 난수를 생성하고 종료조건을 확인한다.
         Random rand = new Random();
         //first
         while(isGamePlaying()) {
-            int com = rand.nextInt(3)+1;
-            // alarm(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
+            com = rand.nextInt(3)+1;
+            // 이긴 횟수 출력하는 부분은 ResultActivity 로 옮겼어요!
             if(check(com))win_number += 1;
+            play_number++;
         }
         //second
         /*

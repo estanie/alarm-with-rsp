@@ -40,7 +40,9 @@
         <activity android:name=".WaitingActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ResultActivity" android:screenOrientation="landscape"/>
         <activity android:name=".StartActivity" android:screenOrientation="landscape"/>
-        <service android:name=".MyService"></service>
+        <service
+            android:name=".MyService">
+        </service>
     </application>
 
 </manifest>
