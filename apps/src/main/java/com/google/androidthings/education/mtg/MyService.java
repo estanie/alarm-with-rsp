@@ -61,6 +61,7 @@ public class MyService extends Service {
             public void run() {
                 myDevice.pause(1);
                 alarm_with_rsp();
+                stopSelf();
                 myDevice.pause(1);
             }
         };
@@ -82,9 +83,9 @@ public class MyService extends Service {
                 alarmThread = new Thread(alarm);
             }
 
-            if (false) {//게임 횟수가 다 되었으면.
+            if (!myDevice.isGamePlaying()) {//게임 횟수가 다 되었으면.
                 alarmThread.interrupt();
-            return;
+                return;
             }
 
             Calendar cal = Calendar.getInstance();

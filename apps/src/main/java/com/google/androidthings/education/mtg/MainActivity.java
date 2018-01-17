@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
 
-        setContentView(R.layout.activity_main);//시간 설정하는 레이아웃이에요! res/layout에 보면 있어용
+        setContentView(R.layout.activity_main);
 
         tv = (TextView) findViewById(R.id.tv);
         tp = (TimePicker) findViewById(R.id.tp);

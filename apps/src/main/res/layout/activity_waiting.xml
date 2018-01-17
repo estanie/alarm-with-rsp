@@ -1,32 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SELECT YOUR CHOICE"/>
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/scissor"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:textSize="32dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A 가위"/>
-        <TextView
-            android:id="@+id/rock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="B 바위"/>
-        <TextView
-            android:id="@+id/paper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C 보"/>
+            android:text="SELECT YOUR CHOICE" />
+
         <Button
+            android:layout_margin="20dp"
             android:id="@+id/waiting_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" 입력 받는 부분 필요"/>
+            android:text=" 입력 받는 부분 생기면 지우기!"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="3">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_columnWeight="1">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/scissor" />
+            <TextView
+                android:id="@+id/scissor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="A 가위" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_columnWeight="1"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/rock" />
+            <TextView
+                android:id="@+id/rock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="B 바위" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_columnWeight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/paper" />
+            <TextView
+                android:id="@+id/paper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="C 보" />
+        </LinearLayout>
+    </GridLayout>
 
 </LinearLayout>

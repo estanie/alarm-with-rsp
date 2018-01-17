@@ -31,10 +31,14 @@ import java.util.Random;
 
 public class MyDevice implements Serializable {
     private static final String TAG = MyDevice.class.getSimpleName();
-
+    private static final int PLAY_GAME_TIMES = 10;
     private Led light;
     private Display display;
     private MusicPlayer music;
+    int win_number = 0;
+    public int getWin_number() {
+        return win_number;
+    }
 
     public Led getLight() {
         return light;
@@ -88,11 +92,13 @@ public class MyDevice implements Serializable {
         return false;
     }
 
+    boolean isGamePlaying() {
+        return win_number < PLAY_GAME_TIMES;
+    }
     void rand_computer() { // 난수를 생성하고 종료조건을 확인한다.
-        int win_number = 0;
         Random rand = new Random();
         //first
-        while(win_number < 10){
+        while(isGamePlaying()) {
             int com = rand.nextInt(3)+1;
             // alarm(win_number); // 스크린에 컴퓨터가 이긴횟수를 표시한다.
             ledOn(win_number);
