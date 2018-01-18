@@ -21,8 +21,7 @@ public class Alarm implements Runnable {
 
         myDevice.alarm_bell(true);
         try {
-            // @TODO: 현재 1분이지만 10분으로 다시 변경해야함.
-            Thread.sleep(1000 * 60);
+            Thread.sleep(1000 * 600);
         } catch (InterruptedException e){
             Log.e(TAG,e.toString());
         }
