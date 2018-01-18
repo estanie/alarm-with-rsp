@@ -12,14 +12,9 @@
             android:layout_height="wrap_content"
             android:text="SELECT YOUR CHOICE" />
 
-        <Button
-            android:layout_margin="20dp"
-            android:id="@+id/waiting_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" 입력 받는 부분 생기면 지우기!"/>
 
     <GridLayout
+        android:layout_margin="20sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="3">
@@ -30,12 +25,11 @@
             android:layout_columnWeight="1">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/scissor"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:src="@drawable/scissor" />
             <TextView
-                android:id="@+id/scissor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -52,12 +46,11 @@
 
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/rock"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:src="@drawable/rock" />
             <TextView
-                android:id="@+id/rock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -71,12 +64,11 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/paper"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:src="@drawable/paper" />
             <TextView
-                android:id="@+id/paper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"

@@ -21,8 +21,8 @@ public class RspGame {
         return win_number;
     }
 
-    int setUserKey(){ // user키 입력 및 컴퓨터에게 이기는 패로 바꿈
-        return 1;
+     void setUserKey(int userKey){
+        this.userKey = userKey;
     }
 
     public void setWin_number(int win_number){
@@ -37,7 +37,6 @@ public class RspGame {
 
 
     boolean check(int computer){ // user키와 컴퓨터키의 매칭을 확인
-        userKey = setUserKey();
         // 1: 가위, 2: 바위, 3: 보
         int result = userKey - computer;
         if (result == 1 || result == -2) {
@@ -58,7 +57,7 @@ public class RspGame {
         if (isGamePlaying()) {
             comKey = rand.nextInt(3)+1;
             // 이긴 횟수 출력하는 부분은 ResultActivity 로 옮겼어요!
-            if(check(comKey)) win_number += 1;
+            if(check(comKey)){ win_number += 1;}
             play_number++;
         }
         Log.d(TAG,"지금까지 플레이한 횟수: "+play_number+ " 이긴 횟수: "+win_number );
