@@ -48,7 +48,9 @@ public class ResultActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_result);
+        Intent waitingIntent = getIntent();
 
+        userResult = waitingIntent.getIntExtra("userResult",0);
         nextStep = (Button)findViewById(R.id.next_step);
         winner = (TextView)findViewById(R.id.winner);
         winTimes = (TextView)findViewById(R.id.win_times);
@@ -75,8 +77,8 @@ public class ResultActivity extends Activity {
     }
 
     private void afterBinding() {
+        ms.game.setUserKey(userResult);
         ms.game.rand_computer();
-        userResult = ms.game.getUserKey();
         comResult = ms.game.getComKey();
         setImage(userResult,userResultImage);
             if (ms.game.isUserWin()) {

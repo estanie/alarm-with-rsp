@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * Created by estanie on 2018-01-15.
@@ -19,14 +20,33 @@ public class WaitingActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_waiting);
-        Button waitingButton = (Button) findViewById(R.id.waiting_button);
+        ImageView rock = (ImageView) findViewById(R.id.rock);
+        ImageView scissor = (ImageView) findViewById(R.id.scissor);
+        ImageView paper = (ImageView) findViewById(R.id.paper);
         // @TODO: 버튼으로 입력 받기 및 완료되면 버튼 제거하기.
-        waitingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent;
-                Log.d(TAG, "Button Clicked");
-                intent = new Intent(WaitingActivity.this, ResultActivity.class);
+
+        rock.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View view){
+                Intent intent = new Intent(WaitingActivity.this, ResultActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("userResult",2);
+                startActivity(intent);
+
+            }
+        });
+        scissor.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View view){
+                Intent intent = new Intent(WaitingActivity.this, ResultActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("userResult",1);
+                startActivity(intent);
+            }
+        });
+        paper.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View view){
+                Intent intent = new Intent(WaitingActivity.this, ResultActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("userResult",3);
                 startActivity(intent);
             }
         });
